@@ -62,7 +62,7 @@ class _TestPageState extends State<TestPage> {
           Padding(
             padding: const EdgeInsets.only(bottom: 20.0), // Padding below buttons
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.end, // Center buttons horizontally
+              mainAxisAlignment: MainAxisAlignment.center, // Center buttons horizontally
               children: [
                 ElevatedButton(
                   onPressed: () {
