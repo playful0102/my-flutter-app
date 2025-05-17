@@ -2,13 +2,8 @@ import 'package:flutter/material.dart';
 
 class FavoritesPage extends StatelessWidget {
   final List<dynamic> favorites;
-  final Function(dynamic) onRemoveBookmark;
 
-  const FavoritesPage({
-    super.key,
-    required this.favorites,
-    required this.onRemoveBookmark,
-  });
+  const FavoritesPage({super.key, required this.favorites});
 
   @override
   Widget build(BuildContext context) {
@@ -46,10 +41,6 @@ class FavoritesPage extends StatelessWidget {
               ),
               title: Text(item['headline'] ?? 'No headline'),
               subtitle: Text(item['summary'] ?? 'No summary available'),
-              trailing: IconButton(
-                icon: Icon(Icons.bookmark, color: Colors.blue),
-                onPressed: () => onRemoveBookmark(item),
-              ),
             ),
           );
         },
@@ -57,3 +48,4 @@ class FavoritesPage extends StatelessWidget {
     );
   }
 }
+
