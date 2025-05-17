@@ -59,11 +59,7 @@ class _MyGeneratorPageState extends State<MyGeneratorPage> {
             HomePage(),
             FavoritesPage(
               favorites: bookmarkedItems.toList(),
-              onRemoveBookmark: (item) {
-                setState(() {
-                  bookmarkedItems.remove(item);
-                });
-              },
+              onBookmarkChanged: _toggleBookmark, // Pass the callback here
             ),
             TestPage(),
             NewsPage(
