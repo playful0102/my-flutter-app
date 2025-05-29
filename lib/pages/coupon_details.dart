@@ -7,12 +7,12 @@ class CouponDetailsPage extends StatelessWidget {
   final String extraInfo;
 
   const CouponDetailsPage({
-    Key? key,
+    super.key, // <-- Use super parameter here
     required this.couponIndex,
     required this.title,
     required this.description,
     required this.extraInfo,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +21,7 @@ class CouponDetailsPage extends StatelessWidget {
         title: Text('Coupon Details'),
         elevation: 0,
       ),
+      backgroundColor: Color(0xFFFFC0CB), // Set the overall background to dark blue
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -32,10 +33,10 @@ class CouponDetailsPage extends StatelessWidget {
                   padding: EdgeInsets.all(24.0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0),
-                    color: Colors.white,
+                    color: Colors.white, 
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.2),
+                        color: Colors.grey.withAlpha((0.2 * 255).toInt()),
                         spreadRadius: 2,
                         blurRadius: 5,
                         offset: Offset(0, 3),
@@ -74,7 +75,14 @@ class CouponDetailsPage extends StatelessWidget {
                         ],
                       ),
                       SizedBox(height: 24),
-                      Divider(),
+                      // Dotted separator line
+                      SizedBox(
+                        height: 16,
+                        child: CustomPaint(
+                          painter: DottedLinePainter(),
+                          size: Size(double.infinity, 1),
+                        ),
+                      ),
                       SizedBox(height: 16),
                       Text(
                         'Additional Information',
@@ -165,4 +173,22 @@ class CouponClipper extends CustomClipper<Path> {
 
   @override
   bool shouldReclip(CustomClipper<Path> oldClipper) => false;
-} 
+}
+
+// Add this class to the same file, below CouponClipper:
+class DottedLinePainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    double dashWidth = 5, dashSpace = 3, startX = 0;
+    final paint = Paint()
+      ..color = Colors.grey
+      ..strokeWidth = 1;
+    while (startX < size.width) {
+      canvas.drawLine(Offset(startX, 0), Offset(startX + dashWidth, 0), paint);
+      startX += dashWidth + dashSpace;
+    }
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => false;
+}

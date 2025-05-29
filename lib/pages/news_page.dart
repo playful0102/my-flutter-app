@@ -20,7 +20,7 @@ class NewsPage extends StatefulWidget {
 class _NewsPageState extends State<NewsPage> {
   final TextEditingController _searchController = TextEditingController();
   String _searchText = '';
-  List<dynamic> newsItems = [];
+  List<Map<String, dynamic>> newsItems = [];
   Set<String> bookmarkedItems = {}; // Use Set<String> instead of Set<dynamic>
 
   @override
@@ -39,9 +39,9 @@ class _NewsPageState extends State<NewsPage> {
       });
     }
   }
-  void _toggleBookmark(dynamic item) {
+  void _toggleBookmark(Map<String, dynamic> item) {
     setState(() {
-      final headline = item['headline'] as String;
+      final String headline = item['headline'] as String;
       if (bookmarkedItems.contains(headline)) {
         bookmarkedItems.remove(headline);
       } else {
@@ -54,7 +54,7 @@ class _NewsPageState extends State<NewsPage> {
   Future<void> _loadNewsData() async {
     final String response = await rootBundle.loadString('pictures_data.json');
     setState(() {
-      newsItems = json.decode(response);
+      newsItems = List<Map<String, dynamic>>.from(json.decode(response) as List);
     });
   }
 
@@ -82,10 +82,10 @@ class _NewsPageState extends State<NewsPage> {
           child: ListView.builder(
             itemCount: newsItems.length,
             itemBuilder: (context, index) {
-              final item = newsItems[index];
-              final headline = item['headline'];
-              final summary = item['summary'];
-              final fullContent = item['detailed_summary'];
+              final Map<String, dynamic> item = newsItems[index];
+              final String headline = item['headline'] as String;
+              final String summary = item['summary'] as String;
+              final String fullContent = item['detailed_summary'] as String;
 
               if (_searchText.isNotEmpty &&
                   !headline.toLowerCase().contains(_searchText) &&
@@ -131,7 +131,7 @@ class _NewsPageState extends State<NewsPage> {
                                       builder: (context) => NewsDetailPage(
                                         headline: headline,
                                         content: fullContent,
-                                        imagePath: item['image'],
+                                        imagePath: item['image'] as String,
                                       ),
                                     ),
                                   );

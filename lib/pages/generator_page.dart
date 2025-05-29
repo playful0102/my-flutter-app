@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:namer_app/pages/figma_coupon.dart';
 import 'home.dart';
 import 'favorites_page.dart';
-import 'test.dart';
 import 'news_page.dart';
 import 'setting.dart';
 
@@ -39,7 +39,7 @@ class _MyGeneratorPageState extends State<MyGeneratorPage> {
               tooltip: 'Settings',
               onPressed: () {
                   Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => SettingsPage()),
+                  MaterialPageRoute<dynamic>(builder: (context) => SettingsPage()),
                 );
               },
             ),
@@ -58,13 +58,13 @@ class _MyGeneratorPageState extends State<MyGeneratorPage> {
           children: [
             HomePage(),
             FavoritesPage(
-              favorites: bookmarkedItems.toList(),
+              favorites: bookmarkedItems.toList().cast<Map<String, dynamic>>(),
               onBookmarkChanged: _toggleBookmark, // Pass the callback here
             ),
-            TestPage(),
+            FigmaCouponPage(),
             NewsPage(
               onBookmarkChanged: _toggleBookmark,
-              initialBookmarks: bookmarkedItems,
+              initialBookmarks: bookmarkedItems.cast<Map<String, dynamic>>(),
             ),
           ],
         ),

@@ -1,38 +1,40 @@
 import 'package:flutter/material.dart';
 
 class SettingsPage extends StatelessWidget {
+  const SettingsPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Settings'),
+        title: const Text('Settings'),
       ),
       body: ListView(
         children: [
           ListTile(
-            leading: Icon(Icons.account_circle),
-            title: Text('Account Settings'),
+            leading: const Icon(Icons.account_circle),
+            title: const Text('Account Settings'),
             onTap: () {
               // Handle account settings navigation
             },
           ),
           ListTile(
-            leading: Icon(Icons.notifications),
-            title: Text('Notification Settings'),
+            leading: const Icon(Icons.notifications),
+            title: const Text('Notification Settings'),
             onTap: () {
               // Handle notification settings navigation
             },
           ),
           ListTile(
-            leading: Icon(Icons.privacy_tip),
-            title: Text('Privacy Settings'),
+            leading: const Icon(Icons.privacy_tip),
+            title: const Text('Privacy Settings'),
             onTap: () {
               // Handle privacy settings navigation
             },
           ),
           ListTile(
-            leading: Icon(Icons.help),
-            title: Text('Help & Support'),
+            leading: const Icon(Icons.help),
+            title: const Text('Help & Support'),
             onTap: () {
               // Handle help navigation
             },
